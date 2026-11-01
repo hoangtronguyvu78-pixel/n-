@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LinguaQuest — English & IELTS Learning Hub</title>
+<style>
+:root{
+ --site-primary:#58CC02;
+ --site-secondary:#235390;
+ --site-background:#F7F9FC;
+ --site-on-primary:#17320A;
+ --site-on-secondary:#FFFFFF;
+ --site-on-background:#172B4D;
+ --site-font-body:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+ --site-font-heading:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+ --site-heading-scale:1;
+ --site-spacing-scale:1;
+ --site-radius-scale:1;
+ --site-decoration-opacity:1;
+ --ink:#172B4D;--muted:#718096;--line:#E5EAF1;--surface:light-dark(#FFFFFF,#172235);
+ --good:#58CC02;--blue:#1CB0F6;--purple:#8B5CF6;--gold:#FFC800;--red:#FF4B4B;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--site-font-body);background:var(--site-background);color:var(--site-on-background)}
+button{font:inherit;cursor:pointer}
+#app{min-height:100vh;width:100%;border-radius:0;background-color:var(--site-background);color:var(--site-on-background);display:grid;grid-template-columns:250px minmax(0,1fr)}
+.sidebar{background:var(--site-secondary);color:white;padding:26px 17px;display:flex;flex-direction:column;gap:24px;min-height:100vh;position:sticky;top:0;height:100vh}
+.brand{display:flex;align-items:center;gap:10px;font-weight:950;font-size:23px;letter-spacing:-1px;padding:0 8px}
+.brand-mark{width:38px;height:38px;border-radius:13px;background:var(--site-primary);color:#17320A;display:grid;place-items:center;font-size:22px;box-shadow:0 5px 0 #3E9700}
+.nav{display:grid;gap:8px}
+.nav button{background:transparent;color:#DCE8F7;border:0;text-align:left;padding:13px 14px;border-radius:14px;font-weight:800;display:flex;align-items:center;gap:13px}
+.nav button.active,.nav button:hover{background:#FFFFFF1C;color:white}
+.nav .ico{font-size:20px;width:24px;text-align:center}
+.sidebar-bottom{margin-top:auto;background:#FFFFFF15;border:1px solid #FFFFFF20;border-radius:18px;padding:15px;font-size:12px;color:#DCE8F7;line-height:1.5}
+.sidebar-bottom b{color:white;font-size:14px}
+main{min-width:0;padding:24px clamp(16px,4vw,54px) 70px;max-width:1250px;width:100%;margin:auto}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px}
+.stats{display:flex;gap:10px;flex-wrap:wrap}
+.stat{background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:9px 13px;font-weight:900;display:flex;align-items:center;gap:7px}
+.stat span{font-size:19px}
+.profile{width:42px;height:42px;border-radius:14px;background:#E9F8DC;display:grid;place-items:center;font-size:22px}
+.hero{background:linear-gradient(115deg,#235390,#3478C8);color:white;border-radius:25px;padding:clamp(22px,4vw,38px);display:flex;align-items:center;justify-content:space-between;gap:20px;position:relative;overflow:hidden;box-shadow:0 7px 0 #193E6E;margin-bottom:28px}
+.hero:after{content:"";position:absolute;width:260px;height:260px;border:38px solid #FFFFFF12;border-radius:50%;right:12%;top:-130px;opacity:var(--site-decoration-opacity);pointer-events:none}
+.hero h1{font-size:calc(34px * var(--site-heading-scale));line-height:1.08;letter-spacing:-1.4px;margin:8px 0 12px;max-width:600px}
+.hero p{color:#E1EEFF;max-width:560px;line-height:1.6;margin:0 0 20px}
+.eyebrow{font-size:11px;letter-spacing:1.6px;font-weight:950;color:#D2E7FF}
+.hero-art{font-size:clamp(75px,11vw,135px);filter:drop-shadow(0 10px 0 #163D6C55);z-index:1}
+.btn{border:0;border-radius:14px;padding:13px 19px;font-weight:950;box-shadow:0 4px 0 #3E9700;background:var(--site-primary);color:#17320A}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #3E9700}
+.btn.secondary{background:white;color:#235390;box-shadow:0 4px 0 #D8E2ED}
+.section-head{display:flex;align-items:end;justify-content:space-between;margin:30px 0 16px;gap:10px}
+.section-head h2{font-size:22px;margin:0;letter-spacing:-.5px}
+.section-head p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:25px;align-items:start}
+.path{display:grid;gap:14px}
+.unit{background:var(--surface);border:2px solid var(--line);border-radius:21px;overflow:hidden}
+.unit-head{padding:17px 20px;background:#EAF8DD;display:flex;justify-content:space-between;align-items:center;gap:12px;color:#244A12}
+.unit-head h3{margin:0;font-size:17px}.unit-head p{margin:4px 0 0;font-size:12px;color:#52713E}
+.unit-body{padding:22px 16px 25px;display:flex;flex-wrap:wrap;justify-content:center;gap:17px}.unit.locked{opacity:.72}.unit.locked .unit-head{background:#EEF1F5!important;color:#65748B!important}.unit-status{font-size:12px;font-weight:900;white-space:nowrap}.unit-action{border:0;border-radius:12px;padding:10px 14px;background:var(--site-primary);color:#17320A;font-weight:900}.unit-action:disabled{background:#E7EBF0;color:#7B8794;cursor:not-allowed}.unit-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 17px 16px;color:var(--muted);font-size:12px}
+.lesson-node{width:84px;display:grid;justify-items:center;gap:7px;border:0;background:transparent;color:var(--ink);font-weight:850;font-size:11px}
+.node{width:66px;height:66px;border-radius:50%;display:grid;place-items:center;background:var(--site-primary);color:#17320A;font-size:27px;border:0;box-shadow:0 6px 0 #3E9700;transition:.15s}
+.lesson-node:nth-child(2n) .node{background:#1CB0F6;box-shadow:0 6px 0 #1286C0;color:white}
+.lesson-node:nth-child(3n) .node{background:#8B5CF6;box-shadow:0 6px 0 #6740C7;color:white}
+.lesson-node:disabled{opacity:.42;filter:grayscale(1)}
+.lesson-node:not(:disabled):hover .node{transform:translateY(-4px)}
+.rightcol{display:grid;gap:15px}
+.card{background:var(--surface);border:2px solid var(--line);border-radius:20px;padding:18px}
+.card h3{margin:0 0 13px;font-size:16px}
+.minirow{display:flex;align-items:center;gap:11px;margin:12px 0}
+.miniicon{font-size:23px}.minirow div:nth-child(2){flex:1}
+.minirow b{font-size:13px}.minirow small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+.progress{height:10px;background:#EAF0F5;border-radius:20px;overflow:hidden;margin-top:7px}
+.progress i{display:block;height:100%;background:var(--site-primary);border-radius:20px;width:35%}
+.league{background:#FFF7D8;border-color:#F3E3A4}
+.league p{font-size:12px;color:#77602A;line-height:1.5}
+.screen{display:none}.screen.active{display:block}
+.lesson-shell{max-width:760px;margin:24px auto;background:var(--surface);border:2px solid var(--line);border-radius:24px;padding:clamp(18px,4vw,34px)}
+.lesson-top{display:flex;align-items:center;gap:14px;margin-bottom:25px}
+.close{border:0;background:transparent;color:var(--muted);font-size:25px}
+.lessonbar{height:13px;background:#EAF0F5;border-radius:20px;flex:1;overflow:hidden}.lessonbar i{display:block;height:100%;width:0;background:var(--site-primary);transition:.25s}
+.hearts{font-weight:900;color:var(--red)}
+.question-tag{font-size:12px;color:var(--muted);font-weight:900;letter-spacing:1px}
+.question{font-size:26px;line-height:1.25;margin:10px 0 7px;letter-spacing:-.6px}
+.prompt{color:var(--muted);margin:0 0 22px}
+.answer-list{display:grid;gap:11px}
+.answer{background:var(--surface);border:2px solid var(--line);border-radius:15px;padding:15px;text-align:left;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:12px}
+.answer:hover{background:#F4FAEF;border-color:#B5E48F}
+.answer.selected{border-color:#1CB0F6;background:#EAF8FF}
+.answer.correct{border-color:var(--good);background:#EDFAE5}
+.answer.wrong{border-color:var(--red);background:#FFF0F0}
+.letter{width:28px;height:28px;border:2px solid var(--line);border-radius:8px;display:grid;place-items:center;color:var(--muted);font-size:12px}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:25px;padding-top:18px;border-top:2px solid var(--line)}
+.feedback{font-weight:850;font-size:14px;min-height:22px}
+.feedback.good{color:#369000}.feedback.bad{color:#D93636}
+.big-result{text-align:center;padding:25px 5px}.big-result .trophy{font-size:75px}.big-result h2{font-size:30px}
+.task-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.task{border:2px solid var(--line);background:var(--surface);border-radius:18px;padding:18px;text-align:left;color:var(--ink)}
+.task strong{display:block;margin:8px 0 4px}.task small{color:var(--muted)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#172B4D;color:white;padding:12px 18px;border-radius:13px;display:none;z-index:10;font-weight:800}
+@media(max-width:950px){#app{grid-template-columns:78px minmax(0,1fr)}.sidebar{padding:20px 10px;align-items:center}.brand{padding:0}.brand-name,.nav-label,.sidebar-bottom{display:none}.nav{width:100%}.nav button{justify-content:center;padding:13px 5px}.layout{grid-template-columns:1fr}.rightcol{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){#app{display:block}.sidebar{position:fixed;z-index:5;top:auto;bottom:0;left:0;right:0;width:100%;height:66px;min-height:0;display:block;padding:6px 9px}.brand{display:none}.nav{display:flex;justify-content:space-around;gap:2px}.nav button{display:grid;gap:0;justify-items:center;padding:5px 9px;font-size:9px}.nav .ico{font-size:20px}.nav-label{display:block}.sidebar-bottom{display:none}main{padding:16px 14px 90px}.top{margin-bottom:16px}.hero{border-radius:20px}.hero-art{font-size:70px}.hero h1{font-size:30px}.stats{gap:6px}.stat{padding:7px 9px;font-size:12px}.layout{gap:14px}.rightcol{grid-template-columns:1fr 1fr}.card{padding:13px}.task-grid{grid-template-columns:1fr}.lesson-shell{margin:12px 0}.question{font-size:23px}}
+
+.resource-intro{background:linear-gradient(120deg,#eef8ff,#f2fbe9);border:1px solid #dcebd6;border-radius:20px;padding:22px;margin-bottom:18px}
+.resource-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.resource-card{background:var(--surface);border:2px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:9px;min-height:185px}
+.resource-card .resource-icon{font-size:28px}.resource-card h3{margin:0;font-size:16px}
+.resource-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55;flex:1}
+.resource-card a,.school-link{color:#1769aa;font-weight:850;text-decoration:none}.resource-card a:hover,.school-link:hover{text-decoration:underline}
+.resource-tag{display:inline-flex;align-self:flex-start;border-radius:30px;background:#eaf8dd;color:#315d18;padding:5px 9px;font-size:10px;font-weight:900}
+.about-hero{background:linear-gradient(120deg,#235390,#397bc6);color:white;border-radius:22px;padding:28px;margin-bottom:18px}
+.about-hero h2{font-size:28px;margin:8px 0}.about-hero p{color:#e6f0ff;line-height:1.7;max-width:700px}
+.about-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.about-panel{background:var(--surface);border:2px solid var(--line);border-radius:18px;padding:20px}.about-panel h3{margin:0 0 10px}
+.member-chip{display:inline-flex;align-items:center;gap:8px;background:#eef8e8;border:1px solid #d7edc8;border-radius:14px;padding:10px 14px;font-weight:850;color:#315d18}
+.site-footer{width:100%;margin:42px 0 0;background:linear-gradient(135deg,#142e50,#1d416b);color:#e8f1fc;border-radius:22px;padding:28px;display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:28px;box-shadow:0 12px 30px #142e5018}
+.site-footer h3,.site-footer h4{color:#fff;margin:5px 0 11px;font-size:16px;letter-spacing:.2px}.site-footer p{font-size:13px;line-height:1.75;color:#c6d6e9;margin:7px 0}
+.site-footer a{color:#b8e4ff;text-decoration:none;font-size:13px;font-weight:800;line-height:1.7}.site-footer a:hover{text-decoration:underline;color:#fff}
+.footer-kicker{font-size:10px;letter-spacing:1.5px;font-weight:950;color:#8fc8f4}.footer-about-link{display:inline-block;margin-top:8px;padding:8px 11px;border:1px solid #ffffff45;border-radius:10px;background:#ffffff10}.footer-bottom{grid-column:1/-1;border-top:1px solid #ffffff28;padding-top:15px;color:#aebfd4;font-size:12px}
+@media(max-width:700px){.resource-grid,.about-grid{grid-template-columns:1fr}.site-footer{grid-template-columns:1fr;gap:18px;padding:21px}.footer-bottom{grid-column:auto}}
+
+
+/* New interactive learning hubs */
+.nav{max-height:calc(100vh - 180px);overflow-y:auto;scrollbar-width:thin}
+.nav button{flex-shrink:0}
+.feature-hero{padding:25px;border-radius:22px;background:linear-gradient(120deg,#673ab7,#3987d5);color:#fff;margin:12px 0 20px;box-shadow:0 7px 0 #35216f}
+.feature-hero h2{font-size:27px;margin:7px 0}.feature-hero p{color:#e9e8ff;line-height:1.6;max-width:700px}
+.feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.feature-card{background:var(--surface);border:2px solid var(--line);border-radius:20px;padding:20px}
+.feature-card h3{margin:7px 0}.feature-card p{color:var(--muted);font-size:13px;line-height:1.6}
+.feature-icon{font-size:34px}.flashcard{min-height:240px;display:grid;place-items:center;text-align:center;background:linear-gradient(135deg,#eaf8dd,#e5f4ff);border:2px solid #d7e9ce;border-radius:24px;padding:25px;cursor:pointer;color:#17320a}
+.flashcard .fc-word{font-size:34px;font-weight:950}.flashcard .fc-hint{font-size:13px;color:#55734c;margin-top:12px}
+.feature-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:16px}
+.feature-btn{border:0;border-radius:12px;padding:11px 16px;font-weight:850;background:#235390;color:white}.feature-btn.green{background:#58CC02;color:#17320A}.feature-btn.light{background:#eef3f8;color:#235390}
+.planner-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}.planner-row input{width:18px;height:18px;accent-color:#58CC02}
+.planner-input,.writing-area,.game-input{width:100%;border:2px solid var(--line);border-radius:13px;padding:13px;font:inherit;background:var(--surface);color:var(--ink)}
+.writing-area{min-height:190px;resize:vertical;line-height:1.6}.word-count{font-size:12px;color:var(--muted);text-align:right;margin-top:7px}
+.scramble-letters{font-size:27px;font-weight:950;letter-spacing:7px;text-align:center;padding:20px;color:#235390;background:#eef6ff;border-radius:16px;margin:15px 0}
+.challenge-question{font-size:21px;font-weight:900;line-height:1.4;margin:12px 0}
+@media(max-width:950px){.nav{max-height:calc(100vh - 100px)}}
+@media(max-width:620px){.nav{max-height:none;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}.nav button{min-width:55px}.feature-grid{grid-template-columns:1fr}.feature-hero{padding:20px}.feature-hero h2{font-size:23px}}
+
+</style>
+</head>
+<body>
+<div id="app">
+<aside class="sidebar">
+ <div class="brand"><div class="brand-mark">✦</div><span class="brand-name">linguaquest</span></div>
+ <nav class="nav">
+  <button class="active" data-screen="home"><span class="ico">🗺️</span><span class="nav-label">Lộ trình</span></button>
+  <button data-screen="practice"><span class="ico">⚡</span><span class="nav-label">Luyện tập</span></button>
+  <button data-screen="words"><span class="ico">📚</span><span class="nav-label">Từ vựng</span></button>
+  <button data-screen="profile"><span class="ico">🏆</span><span class="nav-label">Thành tích</span></button>
+  <button data-screen="daily"><span class="ico">🎯</span><span class="nav-label">Thử thách</span></button>
+  <button data-screen="flashcards"><span class="ico">🃏</span><span class="nav-label">Flashcards</span></button>
+  <button data-screen="planner"><span class="ico">🗓️</span><span class="nav-label">Kế hoạch</span></button>
+  <button data-screen="games"><span class="ico">🎮</span><span class="nav-label">Mini game</span></button>
+  <button data-screen="writing"><span class="ico">✍️</span><span class="nav-label">Góc viết</span></button>
+  <button data-screen="resources"><span class="ico">🌐</span><span class="nav-label">Tài nguyên</span></button>
+  <button data-screen="about"><span class="ico">👥</span><span class="nav-label">Giới thiệu</span></button>
+ </nav>
+ <div class="sidebar-bottom"><b>🎯 Mục tiêu IELTS</b><br>Học đều mỗi ngày để tiến gần hơn tới band điểm mơ ước.<br><br>Keep your streak alive!</div>
+</aside>
+<main>
+ <div class="top">
+  <div class="stats"><div class="stat"><span>🔥</span><b id="streak">1</b><small>ngày</small></div><div class="stat"><span>💎</span><b id="xp">0</b><small>XP</small></div><div class="stat"><span>❤️</span><b id="heartsTop">5</b></div></div>
+  <div class="profile" title="Hồ sơ học tập">🦊</div>
+ </div>
+ <section class="screen active" id="home">
+  <div class="hero"><div><div class="eyebrow">YOUR ENGLISH ADVENTURE STARTS NOW</div><h1>Học tiếng Anh.<br>Chinh phục IELTS.</h1><p>Mỗi ngày một bài học ngắn. Tích lũy XP, mở khóa kỹ năng và biến việc học thành một cuộc phiêu lưu.</p><button class="btn" onclick="startLesson()">BẮT ĐẦU HỌC →</button></div><div class="hero-art">🦊</div></div>
+  <div class="layout"><div>
+   <div class="section-head"><div><h2>🗺️ Hành trình 100 Unit</h2><p>Hoàn thành bài kiểm tra của Unit trước để mở khóa Unit tiếp theo.</p></div><b id="unitCounter" style="color:#58A51C">0/100</b></div>
+   <div class="card" style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;gap:10px;font-weight:850"><span>Tiến độ toàn hành trình</span><span id="journeyPercent">0%</span></div><div class="progress"><i id="journeyBar" style="width:0%"></i></div><small style="color:var(--muted)">Mỗi Unit gồm 5 câu hỏi. Hoàn thành cả 5 câu để mở chặng tiếp theo.</small></div>
+   <div class="path" id="unitPath"></div>
+  </div>
+  <aside class="rightcol">
+   <div class="card"><h3>🎯 Mục tiêu hôm nay</h3><b><span id="dailyxp">0</span>/30 XP</b><div class="progress"><i id="dailybar"></i></div><small style="color:var(--muted)">Hoàn thành một bài học để giữ nhịp!</small></div>
+   <div class="card"><h3>📅 Chuỗi ngày học</h3><div style="font-size:30px">🔥 <b id="streakCard">1</b></div><small style="color:var(--muted)">Một chút mỗi ngày tạo nên khác biệt.</small></div>
+   <div class="card league"><h3>🏅 Bảng xếp hạng</h3><b>Bronze League</b><p>Học thêm để tích lũy XP và tiến lên giải đấu tiếp theo.</p><b>Top 80%</b></div>
+  </aside></div>
+ </section>
+ <section class="screen" id="practice"><div class="section-head"><div><h2>Chọn bài luyện tập</h2><p>Ôn nhanh kiến thức và tích lũy XP mỗi ngày.</p></div></div><div class="task-grid">
+  <button class="task" onclick="startLesson()"><span style="font-size:30px">🧠</span><strong>Grammar Sprint</strong><small>Ngữ pháp · 5 câu · 3 phút</small></button>
+  <button class="task" onclick="startLesson()"><span style="font-size:30px">📘</span><strong>Vocabulary Quest</strong><small>Từ vựng học thuật · 5 câu</small></button>
+  <button class="task" onclick="startLesson()"><span style="font-size:30px">🎧</span><strong>Listening Challenge</strong><small>Nghe và chọn đáp án</small></button>
+  <button class="task" onclick="startLesson()"><span style="font-size:30px">🎯</span><strong>Daily Review</strong><small>Ôn tập kiến thức đã học</small></button>
+ </div></section>
+ <section class="screen" id="words"><div class="section-head"><div><h2>Vocabulary Garden 🌿</h2><p>Từ vựng nền tảng và học thuật cho IELTS.</p></div></div><div class="card" id="wordlist"></div></section>
+ <section class="screen" id="profile"><div class="section-head"><div><h2>Hồ sơ học tập 🏆</h2><p>Mỗi bước nhỏ đều đáng tự hào.</p></div></div><div class="task-grid">
+  <div class="card"><div style="font-size:32px">💎</div><h3><span id="profilexp">0</span> XP</h3><small>Tổng điểm kinh nghiệm</small></div>
+  <div class="card"><div style="font-size:32px">🔥</div><h3><span id="profilestreak">1</span> ngày</h3><small>Chuỗi học tập</small></div>
+  <div class="card"><div style="font-size:32px">🎓</div><h3 id="completed">0</h3><small>Bài học hoàn thành</small></div>
+  <div class="card"><div style="font-size:32px">⭐</div><h3 id="accuracy">—</h3><small>Độ chính xác</small></div>
+ </div></section>
+ 
+  <section class="screen" id="daily">
+   <div class="feature-hero"><div class="eyebrow">DAILY QUEST · EVERY DAY IS A NEW CHANCE</div><h2>🎯 Thử thách mỗi ngày</h2><p>Một câu hỏi ngắn mỗi ngày để ôn lại từ vựng, ngữ pháp và cách dùng tiếng Anh. Hoàn thành thử thách để nhận XP.</p></div>
+   <div class="feature-card" id="dailyChallengeCard"><div class="section-head"><div><h2>Thử thách hôm nay</h2><p id="dailyDateLabel">Câu hỏi được làm mới theo ngày.</p></div><span class="badge-pill">+10 XP</span></div><div id="dailyQuestion"></div></div>
+  </section>
+  <section class="screen" id="flashcards">
+   <div class="section-head"><div><h2>🃏 Flashcards – Vườn từ vựng</h2><p>Lật thẻ để xem nghĩa, ví dụ và luyện phát âm.</p></div><b id="flashIndex">1 / 20</b></div>
+   <div class="flashcard" id="flashcard" onclick="flipFlashcard()" role="button" tabindex="0" aria-label="Lật thẻ từ vựng"><div><div class="fc-word" id="flashWord">adapt</div><div class="fc-hint" id="flashHint">Nhấn vào thẻ để xem nghĩa</div></div></div>
+   <div class="feature-actions"><button class="feature-btn light" onclick="moveFlash(-1)">← Trước</button><button class="feature-btn" onclick="speakCurrentFlashcard()">🔊 Phát âm</button><button class="feature-btn green" onclick="moveFlash(1)">Tiếp theo →</button></div>
+   <div class="feature-card" style="margin-top:18px"><b>💡 Mẹo học:</b><p>Hãy thử nhớ nghĩa trước khi lật thẻ. Đọc ví dụ thành tiếng và tự đặt thêm một câu mới với từ vừa học.</p></div>
+  </section>
+  <section class="screen" id="planner">
+   <div class="feature-hero"><div class="eyebrow">YOUR STUDY ROUTINE</div><h2>🗓️ Kế hoạch học tập</h2><p>Chia nhỏ mục tiêu để duy trì thói quen học tiếng Anh. Các lựa chọn được lưu trên trình duyệt này.</p></div>
+   <div class="feature-grid"><div class="feature-card"><h3>✅ Checklist hôm nay</h3><div id="plannerTasks"></div><p id="plannerProgress">0/5 nhiệm vụ hoàn thành</p><div class="progress"><i id="plannerBar" style="width:0%"></i></div></div>
+   <div class="feature-card"><h3>🎯 Mục tiêu tuần</h3><p>Viết mục tiêu học tập của bạn:</p><textarea class="planner-input" id="weeklyGoal" rows="5" placeholder="Ví dụ: học 30 từ mới, hoàn thành 2 Unit, luyện nghe 3 buổi..."></textarea><div class="feature-actions" style="justify-content:flex-start"><button class="feature-btn green" onclick="saveWeeklyGoal()">Lưu mục tiêu</button></div><small id="goalSaved" style="color:var(--muted)"></small></div></div>
+  </section>
+  <section class="screen" id="games">
+   <div class="feature-hero"><div class="eyebrow">PLAY · THINK · LEARN</div><h2>🎮 Word Scramble</h2><p>Sắp xếp các chữ cái để tìm ra từ tiếng Anh đúng. Mỗi lượt là một thử thách nhỏ.</p></div>
+   <div class="feature-card" style="max-width:720px;margin:auto;text-align:center"><span class="resource-tag">VOCABULARY GAME</span><div class="scramble-letters" id="scrambleLetters">T A D A P</div><p id="scrambleMeaning">Gợi ý: thích nghi</p><input class="game-input" id="scrambleAnswer" placeholder="Nhập từ tiếng Anh..." autocomplete="off" style="max-width:420px;text-align:center;text-transform:lowercase"><div class="feature-actions"><button class="feature-btn green" onclick="checkScramble()">Kiểm tra</button><button class="feature-btn light" onclick="newScramble()">Từ mới ↻</button></div><p id="scrambleFeedback" aria-live="polite"></p><b id="gameScore">Điểm: 0</b></div>
+  </section>
+  <section class="screen" id="writing">
+   <div class="section-head"><div><h2>✍️ IELTS Writing Studio</h2><p>Luyện phát triển ý tưởng và viết đoạn tiếng Anh.</p></div></div>
+   <div class="feature-card"><span class="resource-tag">WRITING TASK 2 PRACTICE</span><h3 id="writingPrompt">Some people believe that technology makes learning easier. To what extent do you agree or disagree?</h3><p>Viết câu trả lời của bạn vào khung bên dưới. Công cụ sẽ đếm số từ và lưu bản nháp trên trình duyệt.</p><textarea class="writing-area" id="writingDraft" placeholder="Write your introduction, body paragraphs and conclusion..."></textarea><div class="word-count"><span id="writingWords">0</span> words</div><div class="feature-actions" style="justify-content:flex-start"><button class="feature-btn green" onclick="saveWritingDraft()">💾 Lưu bản nháp</button><button class="feature-btn light" onclick="newWritingPrompt()">Đổi đề ↻</button><button class="feature-btn" onclick="copyWritingDraft()">Sao chép bài viết</button></div><small id="writingSaved" style="color:var(--muted)"></small></div>
+  </section>
+  <section class="screen" id="resources">
+   <div class="section-head"><div><h2>Thư viện tài nguyên 🌐</h2><p>Các nền tảng học tiếng Anh và luyện IELTS đáng tin cậy.</p></div></div>
+   <div class="resource-intro"><b>💡 Cách sử dụng thư viện</b><p style="margin:7px 0 0;line-height:1.65;color:#52657a">Ưu tiên tài liệu từ IELTS, British Council, IDP và Cambridge để nắm đúng cấu trúc bài thi. Kết hợp các trang luyện tiếng Anh miễn phí để phát triển từ vựng, ngữ pháp và kỹ năng nghe – đọc mỗi ngày.</p></div>
+   <div class="resource-grid">
+    <article class="resource-card"><div class="resource-icon">🎓</div><span class="resource-tag">IELTS chính thức</span><h3>IELTS.org</h3><p>Thông tin bài thi, định dạng, tài liệu chuẩn bị và bài thi mẫu từ đơn vị đồng sở hữu IELTS.</p><a href="https://ielts.org/take-a-test/preparation-resources" target="_blank" rel="noopener noreferrer">Truy cập tài liệu IELTS →</a></article>
+    <article class="resource-card"><div class="resource-icon">🇬🇧</div><span class="resource-tag">Luyện thi IELTS</span><h3>British Council – IELTS</h3><p>Bài luyện miễn phí, video, bài thi thử và hướng dẫn bốn kỹ năng.</p><a href="https://www.britishcouncil.vn/en/exam/ielts/prepare" target="_blank" rel="noopener noreferrer">Học cùng British Council →</a></article>
+    <article class="resource-card"><div class="resource-icon">🌏</div><span class="resource-tag">Luyện thi IELTS</span><h3>IDP IELTS</h3><p>Kho bài luyện theo từng kỹ năng, podcast, video, bài thi làm quen và hướng dẫn ngày thi.</p><a href="https://ielts.idp.com/prepare" target="_blank" rel="noopener noreferrer">Khám phá IDP IELTS →</a></article>
+    <article class="resource-card"><div class="resource-icon">📘</div><span class="resource-tag">Cambridge English</span><h3>Cambridge English</h3><p>Tài liệu luyện thi, hoạt động học tiếng Anh và thông tin về kỳ thi IELTS.</p><a href="https://www.cambridgeenglish.org/exams-and-tests/ielts/" target="_blank" rel="noopener noreferrer">Truy cập Cambridge →</a></article>
+    <article class="resource-card"><div class="resource-icon">🗣️</div><span class="resource-tag">Ngữ pháp · Từ vựng · Nghe</span><h3>British Council – LearnEnglish</h3><p>Bài học theo trình độ, audio, video và bài tập tương tác.</p><a href="https://learnenglish.britishcouncil.org/" target="_blank" rel="noopener noreferrer">Luyện tiếng Anh miễn phí →</a></article>
+    <article class="resource-card"><div class="resource-icon">🎧</div><span class="resource-tag">Listening · Vocabulary</span><h3>BBC Learning English</h3><p>Các bài nghe ngắn, phát âm, từ vựng và nội dung tiếng Anh theo chủ đề.</p><a href="https://www.bbc.co.uk/learningenglish" target="_blank" rel="noopener noreferrer">Nghe và học cùng BBC →</a></article>
+    <article class="resource-card"><div class="resource-icon">🧑‍🎓</div><span class="resource-tag">Dành cho người học trẻ</span><h3>LearnEnglish Teens</h3><p>Bài tập và hoạt động tiếng Anh về đọc, nghe, viết, ngữ pháp và từ vựng.</p><a href="https://learnenglishteens.britishcouncil.org/" target="_blank" rel="noopener noreferrer">Khám phá bài học →</a></article>
+    <article class="resource-card"><div class="resource-icon">💬</div><span class="resource-tag">Video · Listening</span><h3>TED Talks</h3><p>Bài nói theo nhiều chủ đề, phù hợp để luyện nghe và ghi chú ý chính.</p><a href="https://www.ted.com/talks" target="_blank" rel="noopener noreferrer">Xem các bài nói TED →</a></article>
+   </div><p style="font-size:12px;color:var(--muted);margin-top:16px">Một số nền tảng có nội dung miễn phí và nội dung trả phí. LinguaQuest không sở hữu các website liên kết.</p>
+  </section>
+  <section class="screen" id="about">
+   <div class="about-hero"><div class="eyebrow">ABOUT OUR PROJECT</div><h2>Chào mừng đến với LinguaQuest!</h2><p>LinguaQuest là website hỗ trợ học tiếng Anh và luyện IELTS theo cách trực quan, sinh động. Dự án hướng đến việc giúp người học xây dựng thói quen tự học, luyện tập từng kỹ năng và theo dõi tiến độ của mình.</p></div>
+   <div class="about-grid">
+    <article class="about-panel"><h3>👥 Thông tin nhóm</h3><p><b>Tên nhóm:</b> Nhóm 18</p><p><b>Thành viên:</b></p><div class="member-chip">👤 Uy Vũ</div><div class="member-chip">👤 Xuân Trí</div><p style="font-size:12px;color:var(--muted);margin-top:12px">Thành viên thực hiện dự án LinguaQuest – Nhóm 18.</p></article>
+    <article class="about-panel"><h3>🎯 Mục tiêu dự án</h3><ul style="padding-left:19px;line-height:1.8;color:var(--muted);font-size:14px"><li>Tạo môi trường học tiếng Anh dễ tiếp cận.</li><li>Hỗ trợ luyện từ vựng và ngữ pháp.</li><li>Khuyến khích rèn luyện đều đặn mỗi ngày.</li><li>Kết nối người học với nguồn tài liệu đáng tin cậy.</li></ul></article>
+    <article class="about-panel"><h3>✨ Các chức năng chính</h3><p>Lộ trình học tập, bài tập trắc nghiệm, từ vựng có phát âm, theo dõi XP và thành tích, thư viện tài nguyên IELTS cùng trang giới thiệu nhóm.</p></article>
+    <article class="about-panel"><h3>🏫 Đơn vị / trường học</h3><p><b>THCS-THPT Diên Hồng</b></p><p>11 Đ. Thành Thái, Diên Hồng, Hồ Chí Minh</p><a class="school-link" href="https://thptdienhong.hcm.edu.vn/" target="_blank" rel="noopener noreferrer">Website trường học →</a></article>
+   </div>
+  </section>
+  <section class="screen" id="lesson"><div class="lesson-shell">
+  <div class="lesson-top"><button class="close" onclick="showScreen('home')">×</button><div class="lessonbar"><i id="lessonProgress"></i></div><div class="hearts">❤️ <span id="hearts">5</span></div></div>
+  <div id="lessonContent"></div>
+ </div></section>
+ <footer class="site-footer" aria-label="Thông tin cuối trang">
+  <div class="footer-school">
+   <div class="footer-kicker">ĐƠN VỊ THỰC HIỆN</div>
+   <h3>🏫 THCS-THPT DIÊN HỒNG</h3>
+   <p><b>Lớp:</b> 12/1</p>
+   <p>11 Đ. Thành Thái, Diên Hồng, Hồ Chí Minh</p>
+   <a href="https://thptdienhong.hcm.edu.vn/" target="_blank" rel="noopener noreferrer">🌐 Website chính thức của trường <span aria-hidden="true">↗</span></a>
+  </div>
+  <div class="footer-project">
+   <div class="footer-kicker">VỀ WEBSITE</div>
+   <h4>LINGUAQUEST</h4>
+   <p>Nền tảng học tiếng Anh và luyện IELTS thông qua lộ trình, bài luyện tập và tài nguyên học tập trực tuyến.</p>
+  </div>
+  <div class="footer-team">
+   <div class="footer-kicker">THÔNG TIN NHÓM</div>
+   <h4>Tên nhóm: Nhóm 18</h4>
+   <p><b>Thành viên:</b> Uy Vũ, Xuân Trí</p>
+   <a class="footer-about-link" href="#about" onclick="showScreen('about');return false">Xem trang giới thiệu về nhóm <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="footer-bottom">© 2026 LinguaQuest · Sản phẩm học tập của Nhóm 18 · Lớp 12/1 · THCS-THPT Diên Hồng</div>
+ </footer>
+</main>
+
+
+
+</div>
+<div class="toast" id="toast"></div>
+<script>
+// Bộ câu hỏi được tạo riêng cho từng Unit: 5 dạng câu hỏi khác nhau, nội dung thay đổi theo chủ đề.
+const questionSeeds=[
+ ["adapt","thích nghi","People must adapt to new situations.","adjust"], ["achievement","thành tựu","Graduating from university was a great achievement.","accomplishment"], ["analyze","phân tích","Students analyze the results carefully.","examine"], ["approach","cách tiếp cận","We need a different approach to this problem.","method"], ["attitude","thái độ","A positive attitude can improve learning.","mindset"],
+ ["aware","nhận thức được","Many people are aware of climate change.","conscious"], ["challenge","thử thách","Learning a language is a rewarding challenge.","difficulty"], ["communicate","giao tiếp","People communicate in different ways.","interact"], ["community","cộng đồng","The project benefits the local community.","society"], ["complex","phức tạp","This is a complex issue.","complicated"],
+ ["concentrate","tập trung","It is difficult to concentrate in a noisy room.","focus"], ["consequence","hậu quả","Every decision has a consequence.","result"], ["consider","cân nhắc","We should consider all the options.","think about"], ["consume","tiêu thụ","People consume less energy when they save electricity.","use"], ["contribute","đóng góp","Volunteers contribute to the community.","give"],
+ ["convenient","thuận tiện","Online learning is convenient for busy students.","handy"], ["creative","sáng tạo","Creative thinking helps solve problems.","imaginative"], ["culture","văn hóa","Language is an important part of culture.","tradition"], ["decline","sự suy giảm","The report shows a decline in pollution.","decrease"], ["demonstrate","chứng minh","The experiment demonstrates the idea.","show"],
+ ["develop","phát triển","Children develop new skills through practice.","grow"], ["efficient","hiệu quả","An efficient system saves time.","effective"], ["emphasize","nhấn mạnh","The teacher emphasizes clear pronunciation.","highlight"], ["enable","cho phép","Technology can enable faster communication.","allow"], ["encourage","khuyến khích","Parents encourage children to read.","motivate"],
+ ["essential","thiết yếu","Water is essential for life.","necessary"], ["evaluate","đánh giá","We evaluate the results at the end.","assess"], ["expand","mở rộng","The company plans to expand its services.","extend"], ["factor","yếu tố","Cost is an important factor.","element"], ["feature","đặc điểm","The main feature is its simple design.","characteristic"],
+ ["flexible","linh hoạt","A flexible schedule helps students.","adaptable"], ["frequent","thường xuyên","Frequent practice improves fluency.","regular"], ["function","chức năng","The heart has an important function.","role"], ["impact","tác động","Tourism has an impact on local life.","effect"], ["improve","cải thiện","Reading can improve vocabulary.","enhance"],
+ ["indicate","cho thấy","The figures indicate a steady rise.","show"], ["individual","cá nhân","Each individual has different needs.","person"], ["influence","ảnh hưởng","Friends can influence our decisions.","affect"], ["innovative","đổi mới","The school introduced an innovative method.","original"], ["issue","vấn đề","Pollution is a serious issue.","problem"],
+ ["maintain","duy trì","It is important to maintain a healthy routine.","preserve"], ["majority","đa số","The majority of students agreed.","most"], ["method","phương pháp","This method is easy to follow.","approach"], ["occur","xảy ra","Accidents can occur unexpectedly.","happen"], ["participate","tham gia","Students participate in group activities.","take part"],
+ ["particular","cụ thể","This detail is important in this particular case.","specific"], ["perform","thực hiện","The team performed the task well.","carry out"], ["potential","tiềm năng","The idea has great potential.","possibility"], ["prevent","ngăn chặn","Trees help prevent soil erosion.","stop"], ["process","quá trình","Learning is a gradual process.","procedure"],
+ ["provide","cung cấp","The website provides useful resources.","supply"], ["purchase","mua","Customers can purchase tickets online.","buy"], ["require","đòi hỏi","This task requires patience.","need"], ["research","nghiên cứu","The students conducted research.","study"], ["resource","tài nguyên","Clean water is a valuable resource.","supply"],
+ ["respond","phản hồi","Please respond to the email soon.","reply"], ["significant","đáng kể","There was a significant improvement.","important"], ["similar","tương tự","The two pictures are similar.","alike"], ["solution","giải pháp","We need a practical solution.","answer"], ["specific","cụ thể","Please give a specific example.","particular"],
+ ["strategy","chiến lược","A good strategy saves time in the exam.","plan"], ["structure","cấu trúc","The essay has a clear structure.","organization"], ["sufficient","đủ","There is sufficient evidence to support the claim.","enough"], ["support","ủng hộ","The data support the main argument.","back"], ["tend","có xu hướng","Prices tend to rise in summer.","be likely"],
+ ["traditional","truyền thống","Traditional festivals bring people together.","customary"], ["transfer","chuyển","You can transfer the file to your phone.","move"], ["vary","thay đổi","Prices vary from shop to shop.","differ"], ["visible","có thể nhìn thấy","The stars are visible tonight.","noticeable"], ["volunteer","tình nguyện viên","A volunteer helped the visitors.","helper"],
+ ["benefit","lợi ích","Exercise has many benefits.","advantage"], ["career","sự nghiệp","She hopes to build a career in science.","profession"], ["confident","tự tin","He feels confident before the presentation.","sure"], ["environment","môi trường","We should protect the environment.","surroundings"], ["evidence","bằng chứng","The report provides clear evidence.","proof"],
+ ["global","toàn cầu","Global cooperation is important.","worldwide"], ["habit","thói quen","Reading is a useful habit.","routine"], ["independent","độc lập","Students should become independent learners.","self-reliant"], ["knowledge","kiến thức","Knowledge grows through experience.","understanding"], ["language","ngôn ngữ","Language connects people.","communication system"],
+ ["necessary","cần thiết","Sleep is necessary for good health.","essential"], ["opportunity","cơ hội","The course offers an opportunity to practise.","chance"], ["positive","tích cực","Try to maintain a positive outlook.","optimistic"], ["quality","chất lượng","The quality of the service has improved.","standard"], ["reduce","giảm","We should reduce plastic waste.","decrease"],
+ ["responsible","có trách nhiệm","Everyone is responsible for their actions.","accountable"], ["technology","công nghệ","Technology changes the way we learn.","digital tools"], ["unique","độc đáo","Every person has a unique perspective.","distinctive"], ["valuable","có giá trị","Feedback is valuable for improvement.","worthwhile"], ["widespread","phổ biến rộng rãi","The use of smartphones is widespread.","common"], ["accurate","chính xác","The student gave an accurate answer.","correct"], ["alternative","sự thay thế","Cycling is an alternative to driving.","option"], ["approximate","xấp xỉ","The approximate cost is shown below.","rough"], ["aspect","khía cạnh","We discussed every aspect of the issue.","part"], ["capacity","khả năng","The hall has a capacity of 500 people.","ability"], ["category","loại, hạng mục","Place each word in the correct category.","group"], ["establish","thiết lập","The school established a reading club.","set up"], ["identify","xác định","Can you identify the main idea?","recognize"], ["interpret","diễn giải","Students interpret the information in the chart.","explain"], ["justify","biện minh, đưa ra lý do","Writers should justify their opinions with examples.","give reasons for"]
+];
+const grammarItems=[
+ {q:"By the time we arrived, the lesson _____.",a:["starts","had started","has started","starting"],c:1,e:"Use the past perfect for an action completed before another past action."},
+ {q:"If people used public transport more, pollution _____ lower.",a:["is","will be","would be","has been"],c:2,e:"Second conditional: If + past simple, would + base verb."},
+ {q:"The report _____ by the research team last week.",a:["publishes","published","was published","has publishing"],c:2,e:"Use the passive voice when the focus is on the action or result."},
+ {q:"She is interested in _____ a new language.",a:["learn","to learning","learning","learned"],c:2,e:"The adjective interested in is followed by a noun or gerund (-ing)."},
+ {q:"The student _____ won the competition is in my class.",a:["which","whose","who","where"],c:2,e:"Use who as the subject relative pronoun for people."}
+];
+function makeUnitQuestions(unit){
+ const seed=questionSeeds[(unit-1)%questionSeeds.length];
+ const next=questionSeeds[(unit+16)%questionSeeds.length];
+ const distractors=["a type of transport","a personal opinion","a school subject","a temporary situation"];
+ const meaningOptions=[seed[1],...distractors.filter(x=>x!==seed[1]).slice(0,3)];
+ const meaningCorrect=0;
+ const sentenceOptions=[seed[0],next[0],questionSeeds[(unit+31)%questionSeeds.length][0],questionSeeds[(unit+47)%questionSeeds.length][0]];
+ const sentenceCorrect=sentenceOptions.indexOf(seed[0]);
+ const g={...grammarItems[(unit-1)%grammarItems.length]};
+ const shuffle=(arr,correct)=>{const order=[0,1,2,3].sort((a,b)=>((a*7+unit*3)%11)-((b*7+unit*3)%11));return {answers:order.map(i=>arr[i]),correct:order.indexOf(correct)}};
+ const m=shuffle(meaningOptions,meaningCorrect),v=shuffle(sentenceOptions,sentenceCorrect),gr=shuffle(g.a,g.c);
+ const usage=[`Which sentence uses “${seed[0]}” correctly?`,`Chọn câu sử dụng từ “${seed[0]}” đúng ngữ cảnh.`];
+ const questions=[
+  {type:"VOCABULARY · MEANING",q:`What does “${seed[0]}” mean?`,sub:"Chọn nghĩa tiếng Việt phù hợp nhất.",answers:m.answers,correct:m.correct,ex:`${seed[0]} = ${seed[1]}.`},
+  {type:"VOCABULARY · CONTEXT",q:`Complete the sentence: “${seed[2].replace(seed[0],"_____" )}”`,sub:"Chọn từ phù hợp để hoàn thành câu.",answers:v.answers,correct:v.correct,ex:`The correct word is “${seed[0]}” (${seed[1]}).`},
+  {type:"VOCABULARY · SYNONYM",q:`Which word is closest in meaning to “${seed[0]}”?`,sub:"Chọn từ đồng nghĩa gần nhất.",answers:shuffle([seed[3],"forget","damage","refuse"],0).answers,correct:shuffle([seed[3],"forget","damage","refuse"],0).correct,ex:`A close synonym of ${seed[0]} is ${seed[3]}.`},
+  {type:"IELTS · USAGE",q:usage[0],sub:"Chọn câu có cách dùng từ phù hợp.",answers:shuffle([seed[2],`I ${seed[0]} yesterday quickly blue.`,`The ${seed[0]} are running under the table.`,`She can ${seed[0]} a beautiful because.`],0).answers,correct:shuffle([seed[2],`I ${seed[0]} yesterday quickly blue.`,`The ${seed[0]} are running under the table.`,`She can ${seed[0]} a beautiful because.`],0).correct,ex:`Example: ${seed[2]}`},
+  {type:"GRAMMAR",q:g.q,sub:`Ngữ pháp tổng hợp · Unit ${unit}.`,answers:gr.answers,correct:gr.correct,ex:g.e}
+ ];
+ return questions;
+}
+
+const vocab=[["significant","đáng kể, quan trọng","The chart shows a significant increase."],["environment","môi trường","We should protect the environment."],["benefit","lợi ích; có lợi","Exercise has many health benefits."],["maintain","duy trì","It is important to maintain a balance."],["increase","tăng lên; sự gia tăng","The number of users increased."],["evidence","bằng chứng","The report provides clear evidence."]];
+let state={xp:0,streak:1,hearts:5,completed:0,correct:0,answered:0,lessonIndex:0,selected:null,checked:false,completedUnits:[],activeUnit:1};
+try{const saved=JSON.parse(localStorage.getItem("lq-progress")||"null");if(saved)state={...state,...saved};if(!Array.isArray(state.completedUnits))state.completedUnits=[];state.activeUnit=Math.max(1,Math.min(100,Number(state.activeUnit)||1));}catch(e){}
+const unitNames=["The Basics","Everyday English","People & Relationships","Education","Work & Careers","Travel & Transport","Food & Lifestyle","Health & Well-being","Technology","Environment","Present Tenses","Past Tenses","Future Forms","Articles & Determiners","Prepositions","Modal Verbs","Conditionals","Passive Voice","Relative Clauses","Reported Speech","Word Formation","Phrasal Verbs","Collocations","Synonyms & Antonyms","Academic Vocabulary","Reading Skills","Skimming & Scanning","Matching Headings","True False Not Given","Sentence Completion","Listening Basics","Everyday Conversations","Maps & Directions","Multiple Choice Listening","Note Completion","Speaking Fluency","Personal Introduction","Describing Experiences","Comparing & Contrasting","Expressing Opinions","IELTS Speaking Part 1","IELTS Speaking Part 2","IELTS Speaking Part 3","Writing Foundations","Task 1 Charts","Task 1 Processes","Task 1 Maps","Task 2 Opinion Essays","Discussion Essays","Problem & Solution Essays","Advantages & Disadvantages","Coherence & Cohesion","Topic Sentences","Supporting Ideas","Paraphrasing","Complex Sentences","Grammar Accuracy","Vocabulary Precision","Reading: Science","Reading: History","Reading: Society","Reading: Nature","Listening: Interviews","Listening: Lectures","Listening: News","Listening: Discussions","IELTS Mock Test 1","IELTS Mock Test 2","IELTS Mock Test 3","Advanced Grammar","Advanced Vocabulary","Idioms in Context","Word Families","Inference Skills"," लेखक Skills","Data Description","Argument Development","Counterarguments","Pronunciation","Intonation & Stress","Fluency Practice","Listening Strategies","Reading Strategies","Time Management","Exam Techniques","Band 6 to 7","Band 7+ Challenge","Academic Discussion","Real-world English","Integrated Skills","Review & Revision","Checkpoint: Foundation","Checkpoint: IELTS Skills","Checkpoint: Advanced","Final IELTS Challenge","Mastery Review"];
+const unitIcons=["🌱","🧭","👥","🎓","💼","✈️","🥗","💚","💻","🌍","⏳","📆","🔮","📝","📍","⚖️","🔀","🔁","🔗","💬","🧩","🚀","🤝","🔤","📚","📖","🔎","🗂️","☑️","✍️","🎧","🗣️","🗺️","🎯","📋","💬","👋","📸","⚖️","💡"];
+function save(){localStorage.setItem("lq-progress",JSON.stringify({...state,lessonIndex:0,selected:null,checked:false}));updateStats();renderUnits()}
+function updateStats(){
+ ["xp","profilexp"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=state.xp});
+ ["streak","streakCard","profilestreak"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=state.streak});
+ ["hearts","heartsTop"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=state.hearts});
+ const daily=document.getElementById("dailyxp");if(daily)daily.textContent=state.xp%31;
+ const bar=document.getElementById("dailybar");if(bar)bar.style.width=Math.min(100,(state.xp%31)/30*100)+"%";
+ const completed=document.getElementById("completed");if(completed)completed.textContent=state.completed;
+ const accuracy=document.getElementById("accuracy");if(accuracy)accuracy.textContent=state.answered?Math.round(state.correct/state.answered*100)+"%":"—";
+}
+function showScreen(id){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("active",x.dataset.screen===id));if(id==="planner")renderPlanner();if(id==="daily")renderDailyChallenge();}
+document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>showScreen(b.dataset.screen)));
+function unitTitle(n){return unitNames[n-1]||`English Mastery ${n}`}
+function renderUnits(){
+ const path=document.getElementById("unitPath");if(!path)return;
+ const done=new Set(state.completedUnits);const unlocked=Math.min(100,done.size+1);const percent=Math.round(done.size/100*100);
+ document.getElementById("unitCounter").textContent=`${done.size}/100 hoàn thành`;
+ document.getElementById("journeyPercent").textContent=percent+"%";document.getElementById("journeyBar").style.width=percent+"%";
+ path.innerHTML=Array.from({length:100},(_,i)=>{const n=i+1,isDone=done.has(n),isOpen=n===1||done.has(n-1),isLocked=!isOpen&&!isDone;const icon=unitIcons[i%unitIcons.length];const desc=n===1?"Nền tảng tiếng Anh — A2 to B1":n<=25?"Xây dựng nền tảng và vốn từ vựng":n<=60?"Phát triển kỹ năng IELTS":n<=90?"Luyện kỹ năng nâng cao": "Ôn tập và thử thách tổng hợp";return `<article class="unit ${isLocked?'locked':''}"><div class="unit-head"><div><h3>${icon} UNIT ${n} · ${unitTitle(n).toUpperCase()}</h3><p>${desc}</p></div><span class="unit-status">${isDone?'✓ HOÀN THÀNH':isOpen?'🔓 ĐÃ MỞ':'🔒 ĐANG KHÓA'}</span></div><div class="unit-meta"><span>${isDone?'Bạn đã vượt qua chặng này':isOpen?'5 câu hỏi · Hoàn thành để mở Unit '+(n+1):'Hoàn thành Unit '+(n-1)+' để mở khóa'}</span><button class="unit-action" ${isLocked?'disabled':''} onclick="startLesson(${n})">${isDone?'ÔN TẬP':isOpen?'BẮT ĐẦU':'ĐANG KHÓA'}</button></div></article>`}).join("");
+}
+function startLesson(unit=undefined){const n=unit===undefined?Math.min(100,state.completedUnits.length+1):Number(unit);const done=new Set(state.completedUnits);if(n>1&&!done.has(n-1)&&!done.has(n)){toast("Bạn cần hoàn thành Unit "+(n-1)+" trước nhé!");return}if(n>done.size+1&&!done.has(n)){toast("Unit này vẫn đang khóa. Hãy học tuần tự nhé!");return}if(state.hearts<=0)state.hearts=5;state.activeUnit=n;state.lessonIndex=0;state.selected=null;state.checked=false;showScreen("lesson");renderQuestion()}
+function renderQuestion(){const questions=makeUnitQuestions(state.activeUnit);const q=questions[state.lessonIndex];document.getElementById("lessonProgress").style.width=(state.lessonIndex/questions.length*100)+"%";document.getElementById("hearts").textContent=state.hearts;document.getElementById("lessonContent").innerHTML=`<div class="question-tag">UNIT ${state.activeUnit} · ${unitTitle(state.activeUnit).toUpperCase()} · QUESTION ${state.lessonIndex+1}/5 · ${q.type}</div><h2 class="question">${q.q}</h2><p class="prompt">${q.sub}</p><div class="answer-list">${q.answers.map((a,i)=>`<button class="answer ${state.selected===i?"selected":""}" data-answer="${i}" ${state.checked?"disabled":""}><span class="letter">${String.fromCharCode(65+i)}</span>${a}</button>`).join("")}</div><div class="lesson-footer"><div class="feedback" id="feedback"></div><button class="btn" id="checkBtn" ${state.selected===null||state.checked?"disabled":""}>KIỂM TRA</button></div>`;document.querySelectorAll(".answer").forEach(b=>b.addEventListener("click",()=>{if(state.checked)return;state.selected=Number(b.dataset.answer);renderQuestion()}));document.getElementById("checkBtn").addEventListener("click",checkAnswer)}
+function checkAnswer(){if(state.selected===null||state.checked)return;state.checked=true;const questions=makeUnitQuestions(state.activeUnit);const q=questions[state.lessonIndex],ok=state.selected===q.correct;state.answered++;if(ok){state.correct++;state.xp+=10}else{state.hearts=Math.max(0,state.hearts-1)}document.querySelectorAll(".answer").forEach((b,i)=>{if(i===q.correct)b.classList.add("correct");else if(i===state.selected)b.classList.add("wrong")});const fb=document.getElementById("feedback");fb.className="feedback "+(ok?"good":"bad");fb.textContent=ok?"Tuyệt vời! +10 XP":"Chưa chính xác. Hãy ghi nhớ nhé!";const btn=document.getElementById("checkBtn");btn.disabled=false;btn.textContent=state.hearts===0?"HẾT TIM":state.lessonIndex===questions.length-1?"HOÀN THÀNH UNIT":"TIẾP TỤC";btn.onclick=state.hearts===0?showHeartReset:nextQuestion;save();const expl=document.createElement("p");expl.style.cssText="color:var(--muted);font-size:13px;line-height:1.5;margin-top:13px";expl.textContent=q.ex;document.querySelector(".answer-list").after(expl)}
+function showHeartReset(){document.getElementById("lessonContent").innerHTML=`<div class="big-result"><div class="trophy">❤️</div><h2>Bạn đã hết tim!</h2><p>Đừng lo, bạn có thể nạp lại tim và thử lại bài học này.</p><button class="btn" onclick="resetHeartsAndRetry()">NẠP LẠI 5 TIM & THỬ LẠI</button><p><button class="answer" onclick="showScreen('home')">Về lộ trình</button></p></div>`}
+function resetHeartsAndRetry(){state.hearts=5;state.lessonIndex=0;state.selected=null;state.checked=false;save();renderQuestion()}
+function nextQuestion(){const questions=makeUnitQuestions(state.activeUnit);if(state.lessonIndex<questions.length-1){state.lessonIndex++;state.selected=null;state.checked=false;renderQuestion()}else{const unit=state.activeUnit;state.hearts=5;if(!state.completedUnits.includes(unit))state.completedUnits.push(unit);state.completed=state.completedUnits.length;save();document.getElementById("lessonProgress").style.width="100%";const next=unit<100?`<p>🎉 Unit ${unit+1} đã được mở khóa!</p>`:`<p>🏆 Bạn đã chinh phục toàn bộ 100 Unit!</p>`;document.getElementById("lessonContent").innerHTML=`<div class="big-result"><div class="trophy">🏆</div><h2>Unit ${unit} hoàn thành!</h2><p>Bạn đã vượt qua ${unitTitle(unit)}.</p><h2 style="color:#58A51C">+50 XP</h2>${next}<button class="btn" onclick="showScreen('home')">TIẾP TỤC HÀNH TRÌNH</button></div>`}}
+function toast(s){const t=document.getElementById("toast");t.textContent=s;t.style.display="block";setTimeout(()=>t.style.display="none",2200)}
+document.getElementById("wordlist").innerHTML=vocab.map((v,i)=>`<div class="minirow"><div class="miniicon">🌱</div><div><b>${v[0]} <span style="color:var(--muted);font-weight:500">— ${v[1]}</span></b><small><i>${v[2]}</i></small></div><button class="answer" style="padding:7px 10px" onclick="speakWord('${v[0]}')">🔊</button></div>`).join("");
+function speakWord(w){if(!("speechSynthesis"in window)){toast("Trình duyệt chưa hỗ trợ audio");return}const u=new SpeechSynthesisUtterance(w);u.lang="en-GB";speechSynthesis.cancel();speechSynthesis.speak(u)}
+// Additional interactive tabs: daily challenge, flashcards, planner, word game and writing studio.
+const dailyQuestions=[
+ {q:"Choose the correct sentence.",sub:"Chọn câu đúng ngữ pháp.",a:["She go to school every day.","She goes to school every day.","She going to school every day.","She gone to school every day."],c:1,e:"Với chủ ngữ ngôi thứ ba số ít ở hiện tại đơn, động từ thường thêm -s/-es."},
+ {q:"The word ‘essential’ is closest in meaning to…",sub:"Chọn từ gần nghĩa nhất.",a:["unnecessary","temporary","necessary","ordinary"],c:2,e:"Essential có nghĩa là thiết yếu, rất cần thiết."},
+ {q:"If I had more time, I _____ another language.",sub:"Chọn dạng động từ phù hợp.",a:["learn","will learn","would learn","am learning"],c:2,e:"Câu điều kiện loại 2: If + past simple, would + V nguyên mẫu."},
+ {q:"Choose the correct preposition: interested _____ science.",sub:"Điền giới từ phù hợp.",a:["on","in","at","for"],c:1,e:"Cấu trúc: be interested in something."},
+ {q:"‘Significant’ means…",sub:"Chọn nghĩa đúng.",a:["đáng kể","vô ích","hiếm gặp","tạm thời"],c:0,e:"Significant = important or large enough to be noticed."}
+];
+let dailyQuestionIndex=(new Date().getFullYear()*372+new Date().getMonth()*31+new Date().getDate())%dailyQuestions.length;
+function renderDailyChallenge(){const today=new Date().toISOString().slice(0,10);const label=document.getElementById('dailyDateLabel');if(label)label.textContent='Ngày '+today+' · Hoàn thành để nhận 10 XP';const q=dailyQuestions[dailyQuestionIndex];const box=document.getElementById('dailyQuestion');if(!box)return;const done=state.dailyDone===today;box.innerHTML=`<div class="challenge-question">${q.q}</div><p style="color:var(--muted)">${q.sub}</p><div class="answer-list">${q.a.map((a,i)=>`<button class="answer" onclick="answerDaily(${i})" ${done?'disabled':''}><span class="letter">${String.fromCharCode(65+i)}</span>${a}</button>`).join('')}</div><p id="dailyFeedback" class="feedback">${done?'Bạn đã hoàn thành thử thách hôm nay! 🎉':''}</p>`;}
+function answerDaily(i){const today=new Date().toISOString().slice(0,10);if(state.dailyDone===today)return;const q=dailyQuestions[dailyQuestionIndex];const ok=i===q.c;const fb=document.getElementById('dailyFeedback');fb.className='feedback '+(ok?'good':'bad');fb.textContent=(ok?'Chính xác! +10 XP. ':'Chưa đúng. ')+q.e;document.querySelectorAll('#dailyQuestion .answer').forEach((b,n)=>{b.disabled=true;if(n===q.c)b.classList.add('correct');else if(n===i)b.classList.add('wrong')});state.dailyDone=today;if(ok)state.xp+=10;save();}
+const flashDeck=questionSeeds.slice(0,20).map(x=>({word:x[0],meaning:x[1],example:x[2]}));let flashIndex=0,flashBack=false;
+function renderFlashcard(){const f=flashDeck[flashIndex];document.getElementById('flashIndex').textContent=(flashIndex+1)+' / '+flashDeck.length;document.getElementById('flashWord').textContent=flashBack?f.meaning:f.word;document.getElementById('flashHint').textContent=flashBack?f.example:'Nhấn vào thẻ để xem nghĩa và ví dụ';}
+function flipFlashcard(){flashBack=!flashBack;renderFlashcard()}function moveFlash(d){flashIndex=(flashIndex+d+flashDeck.length)%flashDeck.length;flashBack=false;renderFlashcard()}function speakCurrentFlashcard(){const u=new SpeechSynthesisUtterance(flashDeck[flashIndex].word);u.lang='en-GB';speechSynthesis.cancel();speechSynthesis.speak(u)}
+const plannerLabels=['Học 10–15 từ vựng mới','Ôn một chủ điểm ngữ pháp','Luyện nghe tiếng Anh 10 phút','Đọc một đoạn tiếng Anh','Làm ít nhất một bài luyện tập'];
+function renderPlanner(){const host=document.getElementById('plannerTasks');if(!host)return;const tasks=Array.isArray(state.plannerTasks)?state.plannerTasks:[];host.innerHTML=plannerLabels.map((t,i)=>`<label class="planner-row"><input type="checkbox" ${tasks.includes(i)?'checked':''} onchange="togglePlannerTask(${i},this.checked)"><span>${t}</span></label>`).join('');const n=tasks.length;document.getElementById('plannerProgress').textContent=n+'/5 nhiệm vụ hoàn thành';document.getElementById('plannerBar').style.width=(n/5*100)+'%';document.getElementById('weeklyGoal').value=state.weeklyGoal||'';}
+function togglePlannerTask(i,on){let a=Array.isArray(state.plannerTasks)?state.plannerTasks:[];state.plannerTasks=on?[...new Set([...a,i])]:a.filter(x=>x!==i);save();renderPlanner()}function saveWeeklyGoal(){state.weeklyGoal=document.getElementById('weeklyGoal').value;save();document.getElementById('goalSaved').textContent='Đã lưu mục tiêu tuần trên trình duyệt này.'}
+let scrambleIndex=0,gamePoints=0,scrambleDone=false;const scrambleDeck=questionSeeds.slice(0,30);
+function newScramble(){scrambleIndex=Math.floor(Math.random()*scrambleDeck.length);const x=scrambleDeck[scrambleIndex];const letters=x[0].split('');for(let i=letters.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[letters[i],letters[j]]=[letters[j],letters[i]]}if(letters.join('')===x[0])letters.reverse();document.getElementById('scrambleLetters').textContent=letters.join('  ').toUpperCase();document.getElementById('scrambleMeaning').textContent='Gợi ý: '+x[1];document.getElementById('scrambleAnswer').value='';document.getElementById('scrambleFeedback').textContent='';scrambleDone=false;}
+function checkScramble(){if(scrambleDone)return;const answer=document.getElementById('scrambleAnswer').value.trim().toLowerCase();const correct=scrambleDeck[scrambleIndex][0];const fb=document.getElementById('scrambleFeedback');if(answer===correct){gamePoints+=10;state.xp+=5;fb.textContent='🎉 Chính xác! +10 điểm trò chơi, +5 XP';fb.style.color='#369000';scrambleDone=true;document.getElementById('gameScore').textContent='Điểm: '+gamePoints;save()}else{fb.textContent='Chưa đúng, thử lại nhé!';fb.style.color='#D93636'}}
+const writingPrompts=['Some people believe that technology makes learning easier. To what extent do you agree or disagree?','Many students prefer studying online rather than in a classroom. Discuss both views and give your opinion.','Environmental problems are becoming more serious. What are the causes and what solutions can you suggest?','Some people think schools should teach practical skills in addition to academic subjects. Do you agree or disagree?'];let writingPromptIndex=0;
+function updateWritingCount(){const v=document.getElementById('writingDraft').value.trim();document.getElementById('writingWords').textContent=v?v.split(/\s+/).length:0}
+function saveWritingDraft(){state.writingDraft=document.getElementById('writingDraft').value;state.writingPrompt=writingPromptIndex;save();document.getElementById('writingSaved').textContent='Đã lưu bản nháp trên trình duyệt này.'}
+function newWritingPrompt(){writingPromptIndex=(writingPromptIndex+1)%writingPrompts.length;document.getElementById('writingPrompt').textContent=writingPrompts[writingPromptIndex];}
+function copyWritingDraft(){const t=document.getElementById('writingDraft').value;if(!t){toast('Bạn chưa viết nội dung nào.');return}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(()=>toast('Đã sao chép bài viết!')).catch(()=>toast('Trình duyệt không cho phép sao chép tự động.'));else toast('Trình duyệt không hỗ trợ sao chép tự động.')}
+document.getElementById('writingDraft').addEventListener('input',updateWritingCount);
+document.getElementById('writingDraft').value=state.writingDraft||'';writingPromptIndex=Number(state.writingPrompt)||0;document.getElementById('writingPrompt').textContent=writingPrompts[writingPromptIndex];updateWritingCount();
+renderDailyChallenge();renderFlashcard();renderPlanner();newScramble();
+
+updateStats();
+renderUnits();
+</script>
+</body>
+</html>
